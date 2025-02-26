@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CulinaryCompass</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Unified Header Section -->
+    <header id="main-header">
+        <!-- Logo and Title -->
+        <div id="logo-title">
+            <img src="Webpage Logo/Logo.png" alt="Culinary Compass Logo" id="header-logo">
+            <h1 id="header-title">CulinaryCompass</h1>
+        </div>
+
+        <!-- Search Bar and Navigation -->
+        <div id="header-content">
+            <!-- Search Bar -->
+            <div class="search-bar">
+                <input type="text" id="dietary-preference" placeholder="What can we help you find?">
+                <button id="search-button">Search</button>
+            </div>
+
+            <!-- Dropdown Menu -->
+            <nav class="dropdown">
+                <button class="dropbtn">Menu</button>
+                <div class="dropdown-content">
+                    <a href="account.html" id="edit-account">Edit Account Details</a>
+                    <a href="nearby-restaurants.html" id="nearby-restaurants">Nearby Restaurants</a>
+                    <a href="recommended-recipes.html" id="recommended-recipes">Recommended Recipes</a>
+                    <a href="community.html" id="community">Community</a>
+                    <a href="settings.html" id="settings">Settings</a>
+                </div>
+            </nav>
+
+            <!-- Home Button -->
+            <a href="index.html" class="home-button">Home</a>
+        </div>
+    </header>
+
+    <!-- Rest of the page content -->
+</body>
+</html>
+<script src="script.js"></script>
+<body>
+    <div class="news-feed">
+        <body>
+            <div class="news-feed"></div>
+
+            <!-- Template for rendering posts -->
+            <template id="post-template">
+                <div class="post">
+                    <div class="profile">
+                        <img src="" alt="">
+                        <span class="username">
+                            <a href="#" target="_blank"></a>
+                        </span>
+                    </div>
+                    <p class="post-text"></p>
+                    <div class="actions">
+                        <button onclick="toggleLike(this)">Like</button>
+                        <button onclick="sharePost()">Share</button>
+                    </div>
+                    <div class="comments">
+                        <h4>Comments:</h4>
+                        <div class="comment-list"></div>
+                        <input type="text" placeholder="Add a comment">
+                        <button onclick="addComment(this)">Add Comment</button>
+                    </div>
+                </div>
+            </template>
+
+            <script>
+                // Sample data for dynamic rendering
+                const posts = [
+                    {
+                        id: "post1",
+                        profilePic: "JohnDoe.jpg",
+                        username: "John Doe",
+                        userLink: "profile.html?user=johndoe",
+                        text: "Good Morning! Does anyone have a good salt substitute? I've been craving something salty, but I have heart issues and need to avoid salt.",
+                        comments: [
+                            { id: "comment1", text: "Hi John, have you tried adding garlic? Before using it, confirm with your cardiologist." }
+                        ]
+                    },
+                    {
+                        id: "post2",
+                        profilePic: "profile-pic2.jpg",
+                        username: "Jane Smith",
+                        userLink: "profile.html?user=janesmith",
+                        text: "What’s the best way to make gluten-free pasta at home? I’ve tried a few recipes, but they come out sticky.",
+                        comments: [
+                            { id: "comment2", text: "Use rice or chickpea flour and make sure your dough isn't too wet." }
+                        ]
+                    }
+                ];
+
+                // Function to dynamically render posts
+                function renderPosts() {
+                    const feed = document.querySelector('.news-feed');
+                    const template = document.getElementById('post-template');
+
+                    posts.forEach(post => {
+                        const postClone = template.content.cloneNode(true);
+
+                        // Set post details
+                        postClone.querySelector('.profile img').src = post.profilePic;
+                        postClone.querySelector('.profile img').alt = `Profile Picture of ${post.username}`;
+                        postClone.querySelector('.username a').textContent = post.username;
+                        postClone.querySelector('.username a').href = post.userLink;
+                        postClone.querySelector('.post-text').textContent = post.text;
+
+                        // Add comments
+                        const commentList = postClone.querySelector('.comment-list');
+                        post.comments.forEach(comment => {
+                            const commentDiv = document.createElement('div');
+                            commentDiv.classList.add('comment');
+                            commentDiv.id = comment.id;
+                            commentDiv.innerHTML = `
+                                    ${comment.text}
+                                    <div class="comment-buttons">
+                                        <button onclick="editComment('${comment.id}')">Edit</button>
+                                        <button onclick="deleteComment('${comment.id}')">Delete</button>
+                                    </div>
+                                `;
+                            commentList.appendChild(commentDiv);
+                        });
+
+                        feed.appendChild(postClone);
+                    });
+                }
+
+                // Like button toggle functionality
+                function toggleLike(button) {
+                    button.textContent = button.textContent === "Like" ? "Unlike" : "Like";
+                }
+
+                // Placeholder for share functionality
+                function sharePost() {
+                    alert("Post shared!");
+                }
+
+                // Function to add a comment
+                function addComment(button) {
+                    const commentInput = button.previousElementSibling;
+                    const commentList = button.closest('.comments').querySelector('.comment-list');
+
+                    if (commentInput.value.trim()) {
+                        const newCommentDiv = document.createElement('div');
+                        newCommentDiv.classList.add('comment');
+                        newCommentDiv.innerHTML = `
+                                ${commentInput.value}
+                                <div class="comment-buttons">
+                                    <button>Edit</button>
+                                    <button>Delete</button>
+                                </div>
+                            `;
+                        commentList.appendChild(newCommentDiv);
+                        commentInput.value = ""; // Clear input field
+                    } else {
+                        alert("Comment cannot be empty.");
+                    }
+                }
+
+                // Placeholder for editing comments
+                function editComment(commentId) {
+                    alert(`Edit functionality for ${commentId} will go here.`);
+                }
+
+                // Placeholder for deleting comments
+                function deleteComment(commentId) {
+                    const comment = document.getElementById(commentId);
+                    if (comment) comment.remove();
+                }
+
+                // Initialize page
+                document.addEventListener('DOMContentLoaded', renderPosts);
+            </script>
+        </body>
+        </html>
+    </div>
+
+    <template id="post-template">
+        <div class="post">
+            <div class="profile">
+                <img src="" alt="Profile Picture">
+                <span class="username">
+                    <a href="" target="_blank"></a>
+                </span>
+            </div>
+            <p class="post-text"></p>
+            <div class="actions">
+                <button class="like-btn" onclick="toggleLike(this)">Like</button>
+                <button onclick="sharePost()">Share</button>
+            </div>
+            <div class="comments">
+                <h4>Comments:</h4>
+                <div class="comment-list"></div>
+                <input type="text" class="new-comment" placeholder="Add a comment">
+                <button onclick="addComment(this)">Add Comment</button>
+            </div>
+        </div>
+    </template>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CulinaryCompass</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Unified Header Section -->
+    <header id="main-header">
+        <!-- Logo and Title -->
+        <div id="logo-title">
+            <img src="Webpage Logo/Logo.png" alt="Culinary Compass Logo" id="header-logo">
+            <h1 id="header-title">CulinaryCompass</h1>
+        </div>
+
+        <!-- Search Bar and Navigation -->
+        <div id="header-content">
+            <!-- Search Bar -->
+            <div class="search-bar">
+                <input type="text" id="dietary-preference" placeholder="What can we help you find?">
+                <button id="search-button">Search</button>
+            </div>
+
+            <!-- Dropdown Menu -->
+            <nav class="dropdown">
+                <button class="dropbtn">Menu</button>
+                <div class="dropdown-content">
+                    <a href="account.html" id="edit-account">Edit Account Details</a>
+                    <a href="nearby-restaurants.html" id="nearby-restaurants">Nearby Restaurants</a>
+                    <a href="recommended-recipes.html" id="recommended-recipes">Recommended Recipes</a>
+                    <a href="community.html" id="community">Community</a>
+                    <a href="settings.html" id="settings">Settings</a>
+                </div>
+            </nav>
+
+            <!-- Home Button -->
+            <a href="index.html" class="home-button">Home</a>
+        </div>
+    </header>
+
+    <!-- Rest of the page content -->
+</body>
+</html>
+
+
+<script>
+    // JavaScript for handling the navigation to signup page
+    document.getElementById("signup-button").addEventListener("click", function () {
+        window.location.href = "signup.html"; // Redirect to the sign-up page
+    });
+</script>
+</body>
+</html>
+<section id="welcome-message">
+    <h2>Welcome to CulinaryCompass!</h2>
+    <p>Your personal companion to help you find options tailored to your specific needs.</p>
+    <p>Start your culinary journey by searching for restaurants or exploring our community.</p>
+</section>
+<!-- Sign In/Sign Up Section -->
+<section id="sign-in-sign-up">
+    <h2>Please Sign In or Create an Account Below</h2>
+
+    <div id="auth-status">
+        <!-- Active Status (Green) or Inactive Status (Red) will appear here -->
+    </div>
+
+    <form id="login-form">
+        <label for="username">Username:</label>
+        <input type="text" id="username" placeholder="Enter your username" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" placeholder="Enter your password" required>
+
+        <button type="submit" id="login-button">Log In</button>
+    </form>
+
+    <p>Don't have an account? <a href="signup.html" id="sign-up-link">Sign up here</a>
+
+
+    <p><a href="#" id="forgot-password-link">Forgot Password?</a></p>
+</section>
+
+<!-- Sign out -->
+<section id="sign-out-section" style="display: none;">
+    <button id="logout-button">Sign Out</button>
+</section>
+
+<script src="app.js"></script>
+</body>
+</html>
+
+
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        .profile-header {
+            text-align: center;
+            padding: 20px;
+            background-color: #fff;
+            border-bottom: 2px solid #ddd;
+        }
+        .profile-header img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+        .profile-header h1 {
+            margin: 10px 0;
+            color: #333;
+        }
+        .posts {
+            width: 60%;
+            margin: 20px auto;
+        }
+        .post {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #ffffff;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="profile-header">
+        <img id="profilePicture" src="" alt="Profile Picture">
+        <h1 id="profileName"></h1>
+    </div>
+    <div class="posts" id="userPosts">
+        <!-- User-specific posts will be injected here -->
+    </div>
+
+    <script>
+        // User data for demonstration purposes
+        const users = {
+            johndoe: {
+                name: "John Doe",
+                picture: "JohnDoe.jpg",
+                posts: [
+                    "Good Morning! Does anyone have a good salt substitute? I've been craving something salty, but I have heart issues and need to avoid salt."
+                ]
+            },
+            janesmith: {
+                name: "Jane Smith",
+                picture: "profile-pic2.jpg",
+                posts: [
+                    "What’s the best way to make gluten-free pasta at home? I’ve tried a few recipes, but they come out sticky."
+                ]
+            }
+        };
+
+        // Function to get query parameters
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Load user profile dynamically
+        function loadProfile() {
+            const username = getQueryParam("user");
+            const user = users[username];
+
+            if (user) {
+                document.getElementById("profileName").textContent = user.name;
+                document.getElementById("profilePicture").src = user.picture;
+
+                const postsContainer = document.getElementById("userPosts");
+                user.posts.forEach(post => {
+                    const postDiv = document.createElement("div");
+                    postDiv.className = "post";
+                    postDiv.textContent = post;
+                    postsContainer.appendChild(postDiv);
+                });
+            } else {
+                document.getElementById("userPosts").innerHTML = `
+                    <div class="post">User not found or has no posts.</div>
+                `;
+            }
+        }
+
+        // Initialize the profile page
+        loadProfile();
+    </script>
+</body>
+</html>

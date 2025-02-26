@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CulinaryCompass</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Unified Header Section -->
+    <header id="main-header">
+        <!-- Logo and Title -->
+        <div id="logo-title">
+            <img src="Webpage Logo/Logo.png" alt="Culinary Compass Logo" id="header-logo">
+            <h1 id="header-title">CulinaryCompass</h1>
+        </div>
+
+        <!-- Search Bar and Navigation -->
+        <div id="header-content">
+            <!-- Search Bar -->
+            <div class="search-bar">
+                <input type="text" id="dietary-preference" placeholder="What can we help you find?">
+                <button id="search-button">Search</button>
+            </div>
+
+            <!-- Dropdown Menu -->
+            <nav class="dropdown">
+                <button class="dropbtn">Menu</button>
+                <div class="dropdown-content">
+                    <a href="account.html" id="edit-account">Edit Account Details</a>
+                    <a href="nearby-restaurants.html" id="nearby-restaurants">Nearby Restaurants</a>
+                    <a href="recommended-recipes.html" id="recommended-recipes">Recommended Recipes</a>
+                    <a href="community.html" id="community">Community</a>
+                    <a href="settings.html" id="settings">Settings</a>
+                </div>
+            </nav>
+
+            <!-- Home Button -->
+            <a href="index.html" class="home-button">Home</a>
+        </div>
+    </header>
+
+    <!-- Rest of the page content -->
+</body>
+</html>
+
+
+<h2>Settings</h2>
+
+<!-- Tabs for Settings -->
+<div id="settingsTabs">
+    <div class="tab" onclick="openTab('notificationsTab')">Notifications</div>
+    <div class="tab" onclick="openTab('locationTab')">Location</div>
+    <div class="tab" onclick="openTab('emailVerificationTab')">Email Verification</div>
+    <div class="tab" onclick="openTab('statusTab')">Status</div>
+    <div class="tab" onclick="openTab('dietaryPreferencesTab')">Dietary Preferences</div>
+
+    <!-- Content for each tab -->
+    <div id="notificationsTab" class="content">
+        <label><input type="checkbox" id="enableNotifications" onchange="updateSettings()"> Enable Notifications</label>
+    </div>
+    <div id="locationTab" class="content">
+        <label><input type="checkbox" id="locationEnabled" onchange="updateSettings()"> Enable Location Sharing</label>
+    </div>
+    <div id="emailVerificationTab" class="content">
+        <label><input type="checkbox" id="emailVerified" onchange="updateSettings()"> Email Verified</label>
+    </div>
+    <div id="statusTab" class="content">
+        <label><input type="checkbox" id="status" onchange="updateSettings()"> Active Status</label>
+    </div>
+    <div id="dietaryPreferencesTab" class="content">
+        <div id="dietaryPreferencesList"></div>
+    </div>
+</div>
+
+<!-- Display user data (for reference or debugging) -->
+<div class="selected-options" id="userSettingsInfo">
+    <strong>Current Settings:</strong>
+    <div id="settingsInfoDisplay">Loading user settings...</div>
+</div>
+
+<script>
+    const userData = {
+        "_id": "670fd4e9761a37eb6b773b6f",
+        "first_name": "Jane",
+        "last_name": "Smith",
+        "username": "jane.smith",
+        "email": "jane.smith@example.com",
+        "password": "hashed_password_here",
+        "created_at": "2024-10-10T10:00:00.000+00:00",
+        "last_login": "2024-10-09T22:30:00.000+00:00",
+        "role": "user",
+        "dietary_restrictions": ["Gluten Free", "Nut Allergy", "Vegan"],
+        "settings": {
+            "enable_notifications": true,
+            "location_enabled": true,
+            "email_verified": true,
+            "status": true // Active status as boolean
+        }
+    };
+
+    // Initializing settings UI with user data
+    function initializeSettings() {
+        document.getElementById("enableNotifications").checked = userData.settings.enable_notifications;
+        document.getElementById("locationEnabled").checked = userData.settings.location_enabled;
+        document.getElementById("emailVerified").checked = userData.settings.email_verified;
+        document.getElementById("status").checked = userData.settings.status;
+
+        // Dietary Preferences List
+        const dietaryPreferencesList = document.getElementById("dietaryPreferencesList");
+        userData.dietary_restrictions.forEach(restriction => {
+            const preferenceItem = document.createElement("div");
+            preferenceItem.innerText = restriction;
+            dietaryPreferencesList.appendChild(preferenceItem);
+        });
+
+        updateUserSettingsDisplay();
+    }
+
+    // Update the settings object with the new values from the UI
+    function updateSettings() {
+        userData.settings.enable_notifications = document.getElementById("enableNotifications").checked;
+        userData.settings.location_enabled = document.getElementById("locationEnabled").checked;
+        userData.settings.email_verified = document.getElementById("emailVerified").checked;
+        userData.settings.status = document.getElementById("status").checked;
+
+        updateUserSettingsDisplay();
+    }
+
+    // Display current settings to the user
+    function updateUserSettingsDisplay() {
+        const settingsDisplay = `
+                        <strong>Notifications:</strong> ${userData.settings.enable_notifications ? "Enabled" : "Disabled"}<br>
+                        <strong>Location Sharing:</strong> ${userData.settings.location_enabled ? "Enabled" : "Disabled"}<br>
+                        <strong>Email Verified:</strong> ${userData.settings.email_verified ? "Yes" : "No"}<br>
+                        <strong>Status:</strong> ${userData.settings.status ? "Active" : "Inactive"}<br>
+                    `;
+        document.getElementById("settingsInfoDisplay").innerHTML = settingsDisplay;
+    }
+
+    // Handle tab switching
+    function openTab(tabId) {
+        document.querySelectorAll(".content").forEach(content => content.classList.remove("active"));
+        document.querySelectorAll(".tab").forEach(tab => tab.classList.remove("active"));
+        document.getElementById(tabId).classList.add("active");
+        document.querySelector(`[onclick="openTab('${tabId}')"]`).classList.add("active");
+    }
+
+    // Initialize on page load
+    window.onload = function () {
+        initializeSettings();
+        openTab('notificationsTab'); // Set default tab to 'Notifications'
+    }
+</script>
+
+</body>
+</html>
+
+
+<!-- Tabs for Dietary Preferences -->
+<div id="dietaryOptions">
+    <div class="tab" onclick="openTab('vegetarianOptions')">Vegetarian Options</div>
+    <div class="tab" onclick="openTab('allergyConcerns')">Allergy Concerns</div>
+    <div class="tab" onclick="openTab('religiousGuidelines')">Religious Guidelines</div>
+    <div class="tab" onclick="openTab('ingredientRestrictions')">Ingredient Restrictions</div>
+    <div class="tab" onclick="openTab('noneOption')">None</div>
+
+    <!-- Content for each tab -->
+    <div id="vegetarianOptions" class="content">
+        <label><input type="checkbox" onclick="toggleSelectAll('vegetarianOptions', this)"> Select All</label><br>
+        <label><input type="checkbox" class="dietary-checkbox" value="Vegetarian" onclick="updateSelections()"> Vegetarian</label><br>
+        <label><input type="checkbox" class="dietary-checkbox" value="Vegan" onclick="updateSelections()"> Vegan</label><br>
+    </div>
+    <div id="allergyConcerns" class="content">
+        <label><input type="checkbox" onclick="toggleSelectAll('allergyConcerns', this)"> Select All</label><br>
+        <label><input type="checkbox" class="dietary-checkbox" value="Gluten-Free" onclick="updateSelections()"> Gluten-Free</label><br>
+        <label><input type="checkbox" class="dietary-checkbox" value="Nut-Free" onclick="updateSelections()"> Nut-Free</label><br>
+    </div>
+    <div id="religiousGuidelines" class="content">
+        <label><input type="checkbox" onclick="toggleSelectAll('religiousGuidelines', this)"> Select All</label><br>
+        <label><input type="checkbox" class="dietary-checkbox" value="Kosher" onclick="updateSelections()"> Kosher</label><br>
+        <label><input type="checkbox" class="dietary-checkbox" value="Halal" onclick="updateSelections()"> Halal</label><br>
+    </div>
+    <div id="ingredientRestrictions" class="content">
+        <label><input type="checkbox" onclick="toggleSelectAll('ingredientRestrictions', this)"> Select All</label><br>
+        <label><input type="checkbox" class="dietary-checkbox" value="Low-Salt" onclick="updateSelections()"> Low Salt</label><br>
+        <label><input type="checkbox" class="dietary-checkbox" value="Low-Sugar" onclick="updateSelections()"> Low Sugar</label><br>
+    </div>
+    <div id="noneOption" class="content">
+        <label><input type="checkbox" id="noneCheckbox" onclick="handleNoneSelection()"> None</label>
+    </div>
+</div>
+
+<!-- Display selected dietary preferences -->
+<div class="selected-options" id="dietarySelectedOptions"><em>Select dietary preferences to view statistics and pros/cons.</em></div>
+
+<!-- Statistics Box -->
+<div class="box" id="statisticsBox">
+    <strong>Statistics:</strong>
+    <div class="box-content" id="statisticsContent">Select dietary preferences to view relevant statistics.</div>
+</div>
+
+<!-- Pros and Cons Box -->
+<div class="box" id="prosAndConsBox">
+    <strong>Pros and Cons:</strong>
+    <div class="box-content" id="prosAndConsContent">Select dietary preferences to view pros and cons.</div>
+</div>
+
+<!-- JavaScript File -->
+<script src="app.js"></script>

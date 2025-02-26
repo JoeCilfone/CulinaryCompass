@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f2f5;
+    }
+
+    .login-container {
+      width: 320px;
+      padding: 30px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      text-align: center;
+    }
+
+    .login-container h2 {
+      font-size: 1.5em;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #dcdcdc;
+      border-radius: 8px;
+      font-size: 1em;
+      transition: border 0.2s ease;
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+      border-color: #0078d4;
+      outline: none;
+    }
+
+    .remember-me {
+      display: flex;
+      align-items: center;
+      font-size: 0.9em;
+      color: #555;
+      margin-bottom: 10px;
+    }
+
+    .remember-me input {
+      margin-right: 8px;
+      cursor: pointer;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+    }
+
+    button {
+      width: 48%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .cancel-btn {
+      background-color: #f0f2f5;
+      color: #555;
+    }
+
+    .cancel-btn:hover {
+      background-color: #e0e3e7;
+    }
+
+    .ok-btn {
+      background-color: #0078d4;
+      color: #fff;
+    }
+
+    .ok-btn:hover {
+      background-color: #005ea1;
+    }
+
+    .forgot-link {
+      display: block;
+      margin-top: 10px;
+      font-size: 0.9em;
+      color: #0078d4;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .forgot-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<div class="login-container">
+  <h2>Login</h2>
+  <form>
+    <div class="form-group">
+      <label for="username">Please enter your username:</label>
+      <input type="text" id="username" name="username" required>
+    </div>
+    <div class="form-group">
+      <label for="password">Please enter your password:</label>
+      <input type="password" id="password" name="password" required>
+    </div>
+    <div class="remember-me">
+      <input type="checkbox" id="remember" name="remember">
+      <label for="remember">Remember username/password</label>
+    </div>
+    <a class="forgot-link" onclick="forgotPassword()">Forgot Username/Password?</a>
+    <div class="actions">
+      <button type="button" class="cancel-btn">Cancel</button>
+      <button type="submit" class="ok-btn">OK</button>
+    </div>
+  </form>
+</div>
+
+<script>
+  function forgotPassword() {
+    const email = prompt("Please enter the verified email on file:");
+    if (email) {
+        fetch('/api/auth/forgot-password', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email })
+        })
+        .then(response => response.json())
+        .then(data => alert(data.message))
+        .catch(err => alert("Error: " + err.message));
+    }
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f2f5;
+            padding: 20px;
+        }
+
+        .signup-container {
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .signup-container h2 {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .signup-container h3 {
+            font-size: 1.1em;
+            color: #555;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        input[type="text"], input[type="password"], input[type="email"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #dcdcdc;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: border 0.2s;
+            margin-top: 5px;
+        }
+
+        input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus {
+            border-color: #0078d4;
+            outline: none;
+        }
+
+        .password-requirements {
+            font-size: 0.9em;
+            color: #555;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            line-height: 1.8;
+            padding-left: 20px;
+            text-align: left;
+        }
+
+        .password-requirements li {
+            color: red;
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+
+        .password-requirements .met {
+            color: green;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            background-color: #0078d4;
+            color: #fff;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #005ea1;
+        }
+
+        .username-options {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .username-options button {
+            width: auto;
+            padding: 8px 15px;
+            font-size: 0.9em;
+            font-weight: 600;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="signup-container">
+    <form id="signupForm" onsubmit="validateForm(event)">
+        <h2>Sign Up</h2>
+
+        <h3>Welcome to Culinary Compass, enter your information, and start your culinary journey!</h3>
+
+        <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" name="firstName" required oninput="suggestUsername()">
+        </div>
+
+        <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" name="lastName" required oninput="suggestUsername()">
+        </div>
+
+        <div class="form-group">
+            <label for="username">Suggested Username</label>
+            <input type="text" id="username" name="username" placeholder="Suggested username" readonly>
+            <div class="username-options">
+                <button type="button" onclick="acceptSuggestedUsername()">Accept Username</button>
+                <button type="button" onclick="rejectSuggestedUsername()">Reject Username</button>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required oninput="checkPasswordRequirements()">
+            <ul class="password-requirements">
+                <li id="minLength">At least 8 characters</li>
+                <li id="upperCase">One uppercase letter</li>
+                <li id="lowerCase">One lowercase letter</li>
+                <li id="specialChar">One special character</li>
+            </ul>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required onblur="sendVerificationEmail()">
+        </div>
+
+        <div id="dietaryRestrictionsContainer" class="form-group hidden">
+            <label for="dietaryRestrictions">Enter your dietary restrictions:</label>
+            <input type="text" id="dietaryRestrictions" name="dietaryRestrictions">
+        </div>
+
+        <button type="submit">Sign Up</button>
+    </form>
+</div>
+
+<script>
+    function suggestUsername() {
+        const firstName = document.getElementById("firstName").value.trim();
+        const lastName = document.getElementById("lastName").value.trim();
+        document.getElementById("username").value = firstName && lastName ? `${firstName}.${lastName}` : '';
+    }
+
+    function acceptSuggestedUsername() {
+        alert("Username accepted: " + document.getElementById("username").value);
+    }
+
+    function rejectSuggestedUsername() {
+        document.getElementById("username").value = '';
+        document.getElementById("username").readOnly = false;
+        document.getElementById("username").placeholder = "Enter your username";
+    }
+
+    function sendVerificationEmail() {
+        const email = document.getElementById("email").value;
+        if (email) {
+            alert("A verification email has been sent to " + email + ". Please check your inbox.");
+            document.getElementById("dietaryRestrictionsContainer").classList.remove("hidden");
+        }
+    }
+
+    function checkPasswordRequirements() {
+        const password = document.getElementById("password").value;
+        const requirements = [
+            { id: "minLength", test: password.length >= 8 },
+            { id: "upperCase", test: /[A-Z]/.test(password) },
+            { id: "lowerCase", test: /[a-z]/.test(password) },
+            { id: "specialChar", test: /[!@#$%^&*(),.?":{}|<>]/.test(password) },
+        ];
+
+        requirements.forEach(req => {
+            document.getElementById(req.id).classList.toggle("met", req.test);
+        });
+    }
+
+    function validateForm(event) {
+        event.preventDefault();
+        alert("Form submitted successfully!");
+        document.getElementById("signupForm").submit();
+    }
+</script>
+
+</body>
+</html>

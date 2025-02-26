@@ -1,0 +1,518 @@
+/* styles.css */
+
+/* Define Color Variables */
+:root {
+	--primary-color: #A97C61;
+	--secondary-color: #B89F74;
+	--background-color: #F5E8D0;
+	--hover-color: #5A3D2B;
+	--light-color: #f9f9f9;
+	--dark-color: #333;
+}
+
+/* General Styles */
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	background-color: var(--background-color);
+	color: var(--dark-color);
+}
+
+/* Header Styles */
+#main-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	background-color: #7B5C40; /* Dark brown */
+	padding: 20px 40px;
+	position: sticky;
+	top: 0;
+	z-index: 1000;
+}
+
+#logo-title {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+#header-logo {
+	height: 150px; /* Adjust logo size */
+	width: auto; /* Keep aspect ratio intact */
+}
+
+#header-title {
+	font-size: 24px;
+	color: white; /* Match the dark brown theme */
+	margin: 0;
+}
+
+#header-content {
+	display: flex;
+	align-items: center;
+	gap: 5px; /* Space between header elements */
+}
+
+/* Search Bar */
+.search-bar input[type="text"] {
+	padding: 8px;
+	font-size: 14px;
+	border-radius: 4px;
+	border: 1px solid #ccc;
+}
+
+.search-bar button {
+	padding: 8px 12px;
+	font-size: 14px;
+	color: saddlebrown;
+	background-color: #A97C61;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+	.search-bar button:hover {
+		background-color: #A97C61;
+	}
+
+/* Dropdown Menu */
+.dropdown .dropbtn {
+	padding: 8px 12px;
+	font-size: 14px;
+	color: saddlebrown;
+	background-color: #A97C61;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+	.dropdown .dropbtn:hover {
+		background-color: #5A3D2B;
+	}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: white;
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+	border-radius: 4px;
+	margin-top: 5px;
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+
+.dropdown-content a {
+	padding: 10px 20px;
+	display: block;
+	text-decoration: none;
+	color: #333;
+}
+
+	.dropdown-content a:hover {
+		background-color: #f1f1f1;
+	}
+.dropdown:hover .dropdown-content {
+	right: -10px;
+}
+
+	/* Home Button */
+	.home-button {
+	padding: 8px 12px;
+	font-size: 14px;
+	color: saddlebrown;
+	background-color: #A97C61;
+	border: none;
+	border-radius: 4px;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+	.home-button:hover {
+		background-color: #A97C61;
+	}
+
+/* Button Styles */
+.button {
+	padding: 10px 20px;
+	border-radius: 5px;
+	border: none;
+	cursor: pointer;
+	font-size: 16px;
+}
+
+.home-button, #homeButton {
+	background-color: var(--primary-color);
+	color: saddlebrown;
+	text-decoration: none;
+}
+
+	.home-button:hover, #homeButton:hover {
+		background-color: var(--hover-color);
+	}
+
+/* Welcome Message Styles */
+#welcome-message {
+	text-align: center;
+	margin-top: 100px;
+}
+
+/* Main Section Styles */
+#map-container {
+	margin: 20px;
+	height: 500px;
+}
+
+#map {
+	height: 100%;
+	width: 100%;
+}
+
+/* Dietary Preferences Tab and Box Styles */
+.tab, .box {
+	margin: 5px 0;
+	padding: 10px;
+	border: 1px solid #ccc;
+	background-color: var(--light-color);
+}
+
+.tab {
+	display: inline-block;
+	cursor: pointer;
+	background-color: #f0f0f0;
+}
+
+	.tab.active {
+		background-color: #ddd;
+		font-weight: bold;
+	}
+
+.content, .selected-options, .box-content {
+	margin-top: 10px;
+}
+
+.content {
+	display: none;
+}
+
+	.content.active {
+		display: block;
+	}
+
+/* Styling for the Home button in the top right corner */
+#homeButton {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	padding: 10px 20px;
+	background-color: var(--primary-color);
+	color: saddlebrown;
+	border: none;
+	border-radius: 5px;
+	font-size: 16px;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+	#homeButton:hover {
+		background-color: var(--hover-color);
+	}
+
+/* Settings Tabs and Content */
+#settingsTabs {
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
+}
+
+.tab {
+	margin: 0 10px;
+	padding: 10px 20px;
+	background-color: #ccc;
+	cursor: pointer;
+}
+
+	.tab:hover {
+		background-color: #aaa;
+	}
+
+	.tab.active {
+		background-color: var(--primary-color);
+		color: white;
+	}
+
+.content {
+	display: none;
+}
+
+	.content.active {
+		display: block;
+		padding: 20px;
+		background-color: #fff;
+		margin-top: 20px;
+		border-radius: 8px;
+	}
+
+.selected-options {
+	margin-top: 20px;
+	padding: 10px;
+	background-color: #fff;
+	border-radius: 8px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 80%;
+	max-width: 600px;
+}
+
+label {
+	display: block;
+	margin: 10px 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+	.search-bar {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	#map-container {
+		margin: 10px;
+		height: 300px;
+	}
+
+	.dropdown-content {
+		min-width: 140px;
+	}
+}
+/* General Styles */
+body {
+	font-family: Arial, sans-serif;
+	text-align: center;
+}
+
+.top-left-image {
+	display: inline-block;
+	text-align: left;
+}
+
+.shifted-title {
+	margin-left: 20px;
+	vertical-align: middle;
+}
+
+header {
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 20px;
+}
+
+#homeButton {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+	background-color: #4CAF50;
+	color: white;
+	padding: 10px;
+	text-decoration: none;
+	border-radius: 5px;
+}
+
+/* Account Details */
+.account-details {
+	margin-top: 50px;
+	display: inline-block;
+	text-align: left;
+	padding: 20px;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	background-color: #f9f9f9;
+}
+
+	.account-details img {
+		max-width: 150px;
+		border-radius: 50%;
+	}
+
+	.account-details p {
+		margin: 5px 0;
+	}
+
+.dietary-restrictions {
+	margin-top: 10px;
+}
+
+	.dietary-restrictions p {
+		display: inline-block;
+		margin: 5px;
+		padding: 5px;
+		background-color: #e0f7fa;
+		border-radius: 5px;
+}
+.login-container {
+	margin-top: 100px; /* Adjust this value to move it further down or up */
+	text-align: center;
+}
+
+	.login-container form {
+		display: inline-block;
+	}
+/* Style for #restaurant-details */
+#restaurant-details {
+	background-color: #fff; /* Keep the card white for contrast */
+	border: 1px solid #ccc;
+	border-radius: 8px;
+	margin: 20px auto;
+	padding: 20px;
+	max-width: 800px;
+	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add a shadow for better visibility */
+}
+/* General layout for the news feed */
+.news-feed {
+	width: 80%;
+	margin: 20px auto;
+	font-family: Arial, sans-serif;
+	padding: 20px;
+}
+
+/* Style for the post container */
+.post {
+	margin-bottom: 20px; /* Adds space between posts */
+	background-color: white; /* Sets the background color to white */
+	border: 1px solid #ccc; /* Adds a light border around the post container */
+	padding: 15px; /* Adds padding inside the post container */
+	border-radius: 10px; /* Rounds the corners of the post container */
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow around the post */
+}
+
+/* Style for the post text */
+.post-text {
+	font-size: 16px; /* Sets a slightly larger font size for the post text */
+	margin-bottom: 10px; /* Adds space between the text and the actions section */
+}
+
+/* Style for the profile section */
+.profile img {
+	width: 40px; /* Sets a fixed size for the profile picture */
+	height: 40px; /* Sets a fixed size for the profile picture */
+	border-radius: 50%; /* Makes the profile picture circular */
+	margin-right: 10px; /* Adds space between the profile picture and the username */
+}
+
+.username {
+	font-weight: bold; /* Makes the username bold */
+	font-size: 14px; /* Sets a smaller font size for the username */
+}
+	/* Profile image style */
+	.profile img {
+		width: 50px;
+		height: 50px;
+		border-radius: 50%;
+		margin-right: 10px;
+	}
+
+	/* Username style */
+	.profile .username {
+		font-weight: bold;
+	}
+
+		.profile .username a {
+			color: #333;
+			text-decoration: none;
+		}
+
+			.profile .username a:hover {
+				text-decoration: underline;
+			}
+
+/* Actions (Like/Share buttons) style */
+.actions {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+	.actions button {
+		background-color: #A97C61;
+		color: saddlebrown;
+		border: none;
+		padding: 5px 10px;
+		border-radius: 5px;
+		cursor: pointer;
+		font-size: 14px;
+		transition: background-color 0.3s;
+	}
+
+		.actions button:hover {
+			background-color: #A97C61;
+		}
+
+/* Comments section style */
+.comments {
+	margin-top: 15px;
+}
+
+/* Style for individual comment container */
+.comment {
+	margin-bottom: 10px;
+	background-color: white; /* Sets the background color to white */
+	border: 1px solid #ccc; /* Adds a light border around the comment box */
+	padding: 10px; /* Adds padding inside the comment box */
+	border-radius: 5px; /* Rounds the corners of the comment box */
+}
+
+	/* Style for individual comment text */
+	.comment span {
+		display: block;
+		margin-bottom: 5px;
+		font-size: 14px;
+	}
+
+
+/* Style for buttons in comment actions */
+.comment-buttons button {
+	background-color: #A97C61;
+	color: saddlebrown;
+	border: none;
+	padding: 3px 6px;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 12px;
+	transition: background-color 0.3s;
+}
+
+	.comment-buttons button:hover {
+		background-color: #A97C61;
+	}
+
+/* Style for adding a new comment */
+#newComment {
+	width: 100%;
+	padding: 8px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+button.add-comment {
+	padding: 8px 16px;
+	background-color: #A97C61;
+	color: saddlebrown;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+	button.add-comment:hover {
+		background-color: #45a049;
+	}
+
+/* Style for post timestamp (if you add it in future) */
+.post-timestamp {
+	font-size: 12px;
+	color: #888;
+}

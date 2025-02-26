@@ -1,0 +1,110 @@
+id: 670fcdd4f5e9c45d10820d9a
+resturant_name: "Turning Point of Long Branch"
+category: Array (3)
+  0: "Brunch"
+  1: "Food"
+  2: "Outdoor Seating"
+certified: true
+address: Object
+  street: "92 Ocean Avenue N"
+  city: "Long Branch"
+  state: "New Jersey"
+  zip: "07740"
+phone_number: "732-923-1104"
+hours: Object
+  Sunday: "7:30 AM - 3:00 PM"
+  Monday: "7:30 AM - 3:00 PM"
+  Tuesday: "7:30 AM - 3:00 PM"
+  Wednesday: "7:30 AM - 3:00 PM"
+  Thursday: "7:30 AM - 3:00 PM"
+  Friday: "7:30 AM - 3:00 PM"
+  Saturday: "7:30 AM - 3:00 PM"
+menu: "https://turningpoint.orderexperience.net/64b5a1773fc0b075dd0b0b7b/menu"
+website: "https://turningpointrestaurants.com/location/long-branch/"
+average_rating: "7/10"
+delivery_options: "UberEats, DoorDash"
+total_reviews: "80"
+
+
+_id: 670fd04a761a37eb6b773b6b
+resturant_name: "All Seasons Diner"
+category: Array (2)
+  0: "Diner"
+  1: "Food"
+certified: true
+address: Object
+  street: "176 Wyckoff Road"
+  city: "Eatontown"
+  state: "New Jersey"
+  zip: "07724"
+phone_number: "732-542-9462"
+hours: Object
+  Sunday: "7:00 AM - 10:00 PM"
+  Monday: "7:00 AM - 10:00 PM"
+  Tuesday: "7:00 AM - 10:00 PM"
+  Wednesday: "7:00 AM - 10:00 PM"
+  Thursday: "7:00 AM - 10:00 PM"
+  Friday: "7:00 AM - 10:00 PM"
+  Saturday: "7:00 AM - 10:00 PM"
+menu: "https://www.allseasonsrestaurant.net/Eatontown/menu.php"
+website: "https://www.allseasonsrestaurant.net/Eatontown/index.php"
+average_rating: "4/10"
+delivery_options: "N/A"
+total_reviews: "10"
+
+
+_id: 670fd0e3761a37eb6b773b6c
+resturant_name: "Trama's Trattoria"
+category: Array (3)
+  0: "Italian"
+  1: "Food"
+  2: "Vegetarian"
+certified: true
+  address: Object
+  street: "115 Brighton Avenue"
+  city: "Long Branch"
+  state: "New Jersey"
+  zip: "07740"
+phone_number: "732-222-1121"
+hours: Object
+  Sunday: "5:00 PM - 9:00 PM"
+  Monday: "Closed"
+  Tuesday: "5:00 PM - 10:00 PM"
+  Wednesday: "5:00 PM - 10:00 PM"
+  Thursday: "5:00 PM - 10:00 PM"
+  Friday: "5:00 PM - 10:30 PM"
+  Saturday: "5:00 PM - 10:30 PM"
+menu: "https://tramastrattoria.com/menu/"
+website: "https://tramastrattoria.com"
+average_rating: "9/10"
+deliver_options: "UberEats"
+total_reviews: "43"
+
+
+_id: 670fd2ad761a37eb6b773b6e
+resturant_name: "Rooney's Oceanfront Restaurant"
+category: Array (4)
+  0: "Seafood"
+  1: "Bar"
+  2: "Reservations Required"
+  3: "Outdoor Seating"
+certified: false
+address: Object
+  street: "100 Ocean Avenue N"
+  city: "Long Branch"
+  state: "New Jersey"
+  zip: "07740"
+phone_number: "732-870-1200"
+hours: Object
+  Sunday: "11:00 AM - 10:00 PM"
+  Monday: "11:00 AM - 10:00 PM"
+  Tuesday: "11:00 AM - 10:00 PM"
+  Wednesday: "11:00 AM - 10:00 PM"
+  Thursday: "11:00 AM - 10:00 PM"
+  Friday: "11:00 AM - 10:00 PM"
+  Saturday: "11:00 AM - 10:00 PM"
+website: "http://www.rooneysrestaurant.com"
+menu: "https://www.rooneysrestaurant.com/menus/"
+average_rating: "8/10"
+delivery_options: "UberEats, DoorDash"
+total_reviews: "30"

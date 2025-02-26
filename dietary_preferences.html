@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings and Dietary Preferences</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .tab, .box {
+            margin: 5px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+        .tab {
+            display: inline-block;
+            cursor: pointer;
+            background-color: #f0f0f0;
+        }
+        .tab.active {
+            background-color: #ddd;
+            font-weight: bold;
+        }
+        .content, .selected-options, .box-content {
+            margin-top: 10px;
+        }
+        .content {
+            display: none;
+        }
+        .content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Dietary Preferences</h2>
+
+    <!-- Tabs for Dietary Preferences -->
+    <div id="dietaryOptions">
+        <div class="tab" onclick="openTab('vegetarianOptions')">Vegetarian Options</div>
+        <div class="tab" onclick="openTab('allergyConcerns')">Allergy Concerns</div>
+        <div class="tab" onclick="openTab('religiousGuidelines')">Religious Guidelines</div>
+        <div class="tab" onclick="openTab('ingredientRestrictions')">Ingredient Restrictions</div>
+        <div class="tab" onclick="openTab('noneOption')">None</div>
+
+        <!-- Content for each tab -->
+        <div id="vegetarianOptions" class="content">
+            <label><input type="checkbox" onclick="toggleSelectAll('vegetarianOptions', this)"> Select All</label><br>
+            <label><input type="checkbox" class="dietary-checkbox" value="Vegetarian" onclick="updateSelections()"> Vegetarian</label><br>
+            <label><input type="checkbox" class="dietary-checkbox" value="Vegan" onclick="updateSelections()"> Vegan</label><br>
+        </div>
+        <div id="allergyConcerns" class="content">
+            <label><input type="checkbox" onclick="toggleSelectAll('allergyConcerns', this)"> Select All</label><br>
+            <label><input type="checkbox" class="dietary-checkbox" value="Gluten-Free" onclick="updateSelections()"> Gluten-Free</label><br>
+            <label><input type="checkbox" class="dietary-checkbox" value="Nut-Free" onclick="updateSelections()"> Nut-Free</label><br>
+        </div>
+        <div id="religiousGuidelines" class="content">
+            <label><input type="checkbox" onclick="toggleSelectAll('religiousGuidelines', this)"> Select All</label><br>
+            <label><input type="checkbox" class="dietary-checkbox" value="Kosher" onclick="updateSelections()"> Kosher</label><br>
+            <label><input type="checkbox" class="dietary-checkbox" value="Halal" onclick="updateSelections()"> Halal</label><br>
+        </div>
+        <div id="ingredientRestrictions" class="content">
+            <label><input type="checkbox" onclick="toggleSelectAll('ingredientRestrictions', this)"> Select All</label><br>
+            <label><input type="checkbox" class="dietary-checkbox" value="Low-Salt" onclick="updateSelections()"> Low Salt</label><br>
+            <label><input type="checkbox" class="dietary-checkbox" value="Low-Sugar" onclick="updateSelections()"> Low Sugar</label><br>
+        </div>
+        <div id="noneOption" class="content">
+            <label><input type="checkbox" id="noneCheckbox" onclick="handleNoneSelection()"> None</label>
+        </div>
+    </div>
+
+    <!-- Display selected dietary preferences -->
+    <div class="selected-options" id="dietarySelectedOptions"><em>Select dietary preferences to view statistics and pros/cons.</em></div>
+
+    <!-- Statistics Box -->
+    <div class="box" id="statisticsBox">
+        <strong>Statistics:</strong>
+        <div class="box-content" id="statisticsContent">Select dietary preferences to view relevant statistics.</div>
+    </div>
+
+    <!-- Pros and Cons Box -->
+    <div class="box" id="prosAndConsBox">
+        <strong>Pros and Cons:</strong>
+        <div class="box-content" id="prosAndConsContent">Select dietary preferences to view pros and cons.</div>
+    </div>
+
+    <script>
+        const dietaryData = {
+            "Vegetarian": {
+                statistics: "Vegetarian diets can reduce the risk of chronic diseases by 25%.",
+                pros: ["Lower risk of heart disease", "High in fiber and antioxidants", "May aid weight loss"],
+                cons: ["Possible nutrient deficiencies (B12, iron)", "May require careful meal planning"]
+            },
+            "Vegan": {
+                statistics: "Vegans can have a lower body mass index (BMI) on average.",
+                pros: ["Lower cholesterol levels", "Reduced risk of certain cancers", "Ethical considerations"],
+                cons: ["Risk of protein deficiency", "May lack essential nutrients if not planned well"]
+            },
+            "Gluten-Free": {
+                statistics: "Gluten-free diets are essential for individuals with celiac disease.",
+                pros: ["Relief from symptoms of gluten intolerance", "Increased awareness of food choices"],
+                cons: ["May be low in certain nutrients", "Processed gluten-free foods can be unhealthy"]
+            },
+            "Nut-Free": {
+                statistics: "Nut allergies affect about 1-2% of the population.",
+                pros: ["Prevents allergic reactions", "Allows for a broader range of food choices for those with allergies"],
+                cons: ["Limited options in certain cuisines", "May lead to a less diverse diet"]
+            },
+            "Kosher": {
+                statistics: "Kosher food adheres to Jewish dietary laws and may promote mindfulness in eating.",
+                pros: ["Higher standards of food safety", "Cultural and spiritual significance"],
+                cons: ["Limited options in some areas", "Can be more expensive"]
+            },
+            "Halal": {
+                statistics: "Halal diets follow Islamic law, which can promote ethical eating.",
+                pros: ["Humane treatment of animals", "Cultural significance"],
+                cons: ["Limited options in non-Muslim areas", "Some may perceive it as less convenient"]
+            },
+            "Low-Salt": {
+                statistics: "Reducing salt intake can lower blood pressure and reduce heart disease risk.",
+                pros: ["Improves heart health", "Can enhance overall diet quality"],
+                cons: ["May require adjustment to flavor preferences", "Some processed foods may still be high in sodium"]
+            },
+            "Low-Sugar": {
+                statistics: "Lower sugar intake can lead to better weight management and metabolic health.",
+                pros: ["Reduces the risk of diabetes", "Promotes healthier eating habits"],
+                cons: ["Can lead to cravings for sweets", "May require more meal planning"]
+            }
+        };
+
+        function openTab(tabId) {
+            document.querySelectorAll(".content").forEach(content => content.classList.remove("active"));
+            document.querySelectorAll(".tab").forEach(tab => tab.classList.remove("active"));
+            document.getElementById(tabId).classList.add("active");
+            document.querySelector(`[onclick="openTab('${tabId}')"]`).classList.add("active");
+        }
+
+        function updateSelections() {
+            const noneCheckbox = document.getElementById("noneCheckbox");
+
+            if (noneCheckbox.checked) {
+                // Alert popup when "None" is selected
+                alert("You have selected 'None'. No dietary preferences will be considered.");
+                // Clear statistics and pros/cons
+                document.getElementById("statisticsContent").innerHTML = "No dietary preferences selected.";
+                document.getElementById("prosAndConsContent").innerHTML = "No dietary preferences selected.";
+                document.getElementById("dietarySelectedOptions").innerHTML = "<em>No dietary preferences selected.</em>";
+                return; // Exit if "None" is selected
+            } else {
+                // Uncheck "None" if other options are selected
+                noneCheckbox.checked = false;
+            }
+
+            const selectedValues = Array.from(document.querySelectorAll(".dietary-checkbox"))
+                .filter(checkbox => checkbox.checked)
+                .map(checkbox => checkbox.value);
+
+            if (selectedValues.length > 0) {
+                document.getElementById("dietarySelectedOptions").innerHTML = `<strong>Selected Preferences:</strong> ${selectedValues.join(', ')}`;
+                updateStatistics(selectedValues);
+                updateProsAndCons(selectedValues);
+            } else {
+                document.getElementById("dietarySelectedOptions").innerHTML = "<em>Select dietary preferences to view statistics and pros/cons.</em>";
+                document.getElementById("statisticsContent").innerHTML = "Select dietary preferences to view relevant statistics.";
+                document.getElementById("prosAndConsContent").innerHTML = "Select dietary preferences to view pros and cons.";
+            }
+        }
+
+        function handleNoneSelection() {
+            const noneCheckbox = document.getElementById("noneCheckbox");
+            if (noneCheckbox.checked) {
+                // Uncheck all other dietary options if "None" is selected
+                document.querySelectorAll(".dietary-checkbox").forEach(checkbox => checkbox.checked = false);
+                updateSelections(); // Update selections after unchecking
+            } else {
+                // Allow other selections if "None" is unchecked
+                updateSelections();
+            }
+        }
+
+        function toggleSelectAll(tabClass, selectAllCheckbox) {
+            document.querySelectorAll(`#${tabClass} .dietary-checkbox`)
+                .forEach(checkbox => checkbox.checked = selectAllCheckbox.checked);
+            updateSelections();
+        }
+
+        function updateStatistics(selectedValues) {
+            const statisticsHTML = selectedValues.map(value => {
+                return `<strong>${value}:</strong> ${dietaryData[value].statistics}`;
+            }).join('<br>');
+            document.getElementById("statisticsContent").innerHTML = statisticsHTML;
+        }
+
+        function updateProsAndCons(selectedValues) {
+            const prosAndConsHTML = selectedValues.map(value => {
+                const prosList = dietaryData[value].pros.length > 0 ? `<strong>${value} Pros:</strong> ${dietaryData[value].pros.join(', ')}` : `No pros available for ${value}.`;
+                const consList = dietaryData[value].cons.length > 0 ? `<strong>${value} Cons:</strong> ${dietaryData[value].cons.join(', ')}` : `No cons available for ${value}.`;
+                return `${prosList}<br>${consList}`;
+            }).join('<br><br>');
+
+            document.getElementById("prosAndConsContent").innerHTML = prosAndConsHTML;
+        }
+
+        function savePreferences() {
+            const selectedValues = Array.from(document.querySelectorAll(".dietary-checkbox"))
+                .filter(checkbox => checkbox.checked)
+                .map(checkbox => checkbox.value);
+
+            fetch('/api/users/preferences', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ preferences: selectedValues })
+            })
+            .then(response => response.json())
+            .then(data => alert(data.message))
+            .catch(err => alert("Error: " + err.message));
+        }
+
+    </script>
+
+</body>
+</html>
